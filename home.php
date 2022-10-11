@@ -1,5 +1,7 @@
 <?php
 require_once 'clases/Usuario.php';
+require_once 'clases/Empleado.php';
+
 session_start();
 if (isset($_SESSION['usuario'])) {
     $usuario = unserialize($_SESSION['usuario']);
@@ -25,10 +27,10 @@ if (isset($_SESSION['usuario'])) {
         <p><a href="logout.php">Cerrar sesión</a></p>
         <div class="row">
           <div class="col-md-4">
-            <a href="#" class="btn btn-success">Dar de alta empleado</a>
+            <a href="./employee/create.php" class="btn btn-success">Dar de alta empleado</a>
           </div>
           <div class="col-md-4">
-            <a href="#" class="btn btn-warning">Actualizar empleado</a>
+            <a href="./employee/update.php" class="btn btn-warning">Actualizar empleado</a>
           </div>
           <div class="col-md-4">
             <a href="#" class="btn btn-danger">Dar de baja empleado</a>
@@ -54,7 +56,11 @@ if (isset($_SESSION['usuario'])) {
               <td>01/02/2022</td>
               <td>fulano</td>
             </tr>
-            
+            <?php 
+            // $a = new RepositorioEmpleado();
+            // $b = $a->getAll();
+            // var_dump($b);
+            ?>
           </tbody>
         </table>
       </div> 
