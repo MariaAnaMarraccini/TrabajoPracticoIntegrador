@@ -25,30 +25,6 @@ if (isset($_SESSION['usuario'])) {
         <h3>Hola <?php echo $nomApe;?></h3>
         <p><a href="logout.php">Cerrar sesión</a></p>
 
-        <?php 
-        $rp = new RepositorioEmpleado();
-        $res = $rp->getAll();
-        //var_dump($rp->getAll());
-        foreach( $res as $key => $value){
-            //var_dump($value['id']);
-            echo "<tr>
-            <td>".$value['id']."</th>
-            <td>".$value['nombre']."</td>
-            <td>".$value['apellido']."</td>
-            <td>".$value['dni']."</td>
-            <td>".$value['fecha_ingreso']."</td>
-            <td>".$value['id_usuario_ult_mod']."</td>
-          </tr>";
-        }
-        // if ($rp['num_rows'] > 0) {
-        //     // output data of each row
-        //     while($row = $res->fetch_assoc()) {
-        //       echo "id: " . $row["id"]. " - Name: " . $row["nombre"]. " " . $row["apellido"]. "<br>";
-        //     }
-        //   } else {
-        //     echo "0 results";
-        //   }
-        ?>
         <form method="POST" action="functions.php">
             <div class="form-group">
                 <label for="id">ID</label>

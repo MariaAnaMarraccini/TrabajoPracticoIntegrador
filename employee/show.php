@@ -44,9 +44,7 @@ if (isset($_SESSION['usuario'])) {
           <?php 
             $rp = new RepositorioEmpleado();
             $res = $rp->getAll();
-            //var_dump($rp->getAll());
             foreach( $res as $key => $value){
-                //var_dump($value['id']);
                 echo "<tr>
                 <td>".$value['id']."</th>
                 <td>".$value['nombre']."</td>
