@@ -2,6 +2,7 @@
 require_once 'clases/Usuario.php';
 require_once 'clases/Empleado.php';
 
+
 session_start();
 if (isset($_SESSION['usuario'])) {
     $usuario = unserialize($_SESSION['usuario']);
@@ -33,36 +34,12 @@ if (isset($_SESSION['usuario'])) {
             <a href="./employee/update.php" class="btn btn-warning">Actualizar empleado</a>
           </div>
           <div class="col-md-4">
-            <a href="#" class="btn btn-danger">Dar de baja empleado</a>
+            <a href="./employee/delete.php" class="btn btn-danger">Dar de baja empleado</a>
           </div>
         </div>
-        <table class="table mt-4">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Apellido</th>
-              <th scope="col">DNI</th>
-              <th scope="col">Ingreso</th>
-              <th scope="col">Modificado por</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>34444555</td>
-              <td>01/02/2022</td>
-              <td>fulano</td>
-            </tr>
-            <?php 
-            // $a = new RepositorioEmpleado();
-            // $b = $a->getAll();
-            // var_dump($b);
-            ?>
-          </tbody>
-        </table>
+        <div class="mt-4">
+        <a href="./employee/show.php" class="btn btn-primary">Ver listado de empleados</a>
+        </div>
       </div> 
     </body>
 </html>

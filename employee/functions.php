@@ -8,11 +8,11 @@ require_once '../clases/RepositorioEmpleado.php';
 
 if(isset($_POST['id'])){
 
-    $empleado = new Empleado($_POST['nombre'],$_POST['apellido'],$_POST['dni'],$_POST['id_usuario'],$_POST['id']);
+    $empleado = new Empleado($_POST['nombre'],$_POST['apellido'],$_POST['dni'],$_POST['id_usuario']);
     // var_dump($empleado);
     // die();
     $er = new RepositorioEmpleado();
-    $er->update($empleado);
+    $er->update($empleado,$_POST['id']);
 }else{
     $empleado = new Empleado($_POST['nombre'],$_POST['apellido'],$_POST['dni'],$_POST['id_usuario']);
     $er = new RepositorioEmpleado();
@@ -21,4 +21,3 @@ if(isset($_POST['id'])){
 
 header('Location: ../home.php');
 
-die();

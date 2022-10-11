@@ -26,24 +26,26 @@ class RepositorioEmpleado
         }
    }
 
-   public function getAll()
-   {
-        $q = "SELECT * FROM empleados";
-    
-        $query = self::$conexion->prepare($q);
-
-        $query->execute();
-        $result = self::$conexion->query($query);
-        if ($query->execute()) {
-            // Se guardó bien, retornamos el id del usuario
-            var_dump($result);
+    public function getAll()
+    {
             
-            return $result;
-        } else {
-            // No se guardó bien, retornamos false
-            return false;
-        }
-   }
+            $result = self::$conexion->query("SELECT * FROM empleados");
+
+            $res = [];
+
+            if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        
+                       $arr = [ 'id' => $row["id"],'nombre' => $row["nombre"], 'apellido' => $row["apellido"], 'dni' => $row["dni"], 'id_usuario_ult_mod'=> $row["id_usuario_ult_mod"],'fecha_ingreso' => $row["fecha_ingreso"]];
+                       array_push($res, $arr );
+                    }
+                  } 
+            
+             
+                
+                return $res;
+
+    }
 
     public function save(Empleado $empleado)
     {
@@ -67,26 +69,36 @@ class RepositorioEmpleado
         }
     }
 
-    public function update(Empleado $empleado)
+    public function update(Empleado $empleado, $id)
     {
         $q = "UPDATE empleados ";
-        var_dump($empleado);
-        $q.= "SET nombre = ?, apellido = ?, dni = ?, id_usuario_ult_mod = ? WHERE id = ?";
+
+        $nombre = $empleado->getNombre();
+        $apellido = $empleado->getApellido();
+        $dni = $empleado->getDNI();
+        $usuario = $empleado->getUsuario();
+
+        $q.= "SET nombre = '$nombre', apellido = '$apellido', dni = $dni, id_usuario_ult_mod = $usuario WHERE id = $id";
         $query = self::$conexion->prepare($q);
         
-        $query->bind_param(
-            $empleado->getNombre(),
-            $empleado->getApellido(),
-            $empleado->getDNI(),
-            $empleado->getUsuario(),
-            $empleado->getId()
-        );
-
         if ($query->execute()) {
             // Se guardó bien, retornamos el id del usuario
             return self::$conexion->insert_id;
         } else {
             // No se guardó bien, retornamos false
+            return false;
+        }
+    }
+
+    public function delete($id)
+    {
+        $q = "DELETE FROM empleados ";
+        $q.= "WHERE id = $id";
+        $query = self::$conexion->prepare($q);
+        
+        if ($query->execute()) {
+            return self::$conexion->insert_id;
+        } else {
             return false;
         }
     }
