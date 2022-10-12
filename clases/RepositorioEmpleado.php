@@ -29,14 +29,14 @@ class RepositorioEmpleado
     public function getAll()
     {
             
-            $result = self::$conexion->query("SELECT * FROM empleados");
+            $result = self::$conexion->query("SELECT empleados.*, CONCAT(usuarios.nombre,' ',usuarios.apellido) as nombre_usuario FROM empleados INNER JOIN usuarios ON usuarios.id = empleados.id_usuario_ult_mod");
 
             $res = [];
 
             if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         
-                       $arr = [ 'id' => $row["id"],'nombre' => $row["nombre"], 'apellido' => $row["apellido"], 'dni' => $row["dni"], 'id_usuario_ult_mod'=> $row["id_usuario_ult_mod"],'fecha_ingreso' => $row["fecha_ingreso"]];
+                       $arr = [ 'id' => $row["id"],'nombre' => $row["nombre"], 'apellido' => $row["apellido"], 'dni' => $row["dni"], 'id_usuario_ult_mod'=> $row["id_usuario_ult_mod"]." - ".$row["nombre_usuario"],'fecha_ingreso' => $row["fecha_ingreso"]];
                        array_push($res, $arr );
                     }
                   } 

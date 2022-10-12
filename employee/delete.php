@@ -23,7 +23,7 @@ if (isset($_SESSION['usuario'])) {
       </div>    
       <div class="text-center">
         <h3>Hola <?php echo $nomApe;?></h3>
-        <p><a href="logout.php">Cerrar sesión</a></p>
+        <p><a href="../logout.php">Cerrar sesión</a></p>
 
         <form method="POST" action="functions.php">
             <div class="form-group">
