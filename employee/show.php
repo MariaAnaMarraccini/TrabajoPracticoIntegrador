@@ -27,7 +27,15 @@ if (isset($_SESSION['usuario'])) {
       <div class="text-center">
         <h3>Hola <?php echo $nomApe;?></h3>
         <p><a href="../logout.php">Cerrar sesión</a></p>
+        <?php 
+            $rp = new RepositorioEmpleado();
+            $res = $rp->countEmployees();
+            echo "<p class='text-center'>Cantidad de empleados: ".$res[0]["cantidad_empleados"]."</p>";
+            
+
+            ?>
         <div class="row">
+        
         <table class="table mt-4">
 
           <thead>

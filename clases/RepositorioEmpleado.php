@@ -40,11 +40,26 @@ class RepositorioEmpleado
                        array_push($res, $arr );
                     }
                   } 
-            
-             
-                
+
                 return $res;
 
+    }
+
+    public function countEmployees()
+    {
+        $result = self::$conexion->query("SELECT COUNT(id) as cantidad_empleados FROM empleados");
+
+            $res = [];
+
+            if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        
+                       $arr = [ 'cantidad_empleados' => $row["cantidad_empleados"]];
+                       array_push($res, $arr );
+                    }
+                  } 
+
+                return $res;
     }
 
     public function save(Empleado $empleado)
